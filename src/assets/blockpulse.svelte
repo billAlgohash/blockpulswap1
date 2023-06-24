@@ -1,4 +1,4 @@
-<svg width="60" height="50" viewBox="0 0 346 381" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="30" height="44" viewBox="0 0 346 381" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_b_581_1649)">
 <rect width="125.338" height="125.338" transform="matrix(0.5 -0.866025 1 0 117.41 311.249)" fill="#0500FF" fill-opacity="0.8"/>
 </g>
@@ -321,7 +321,7 @@
 
 
 
-<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1837 413" width="222" height="50">
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1837 413" width="200" height="60">
 	<style>
 		.s0 { fill: #8cfffb } 
 		.s1 { opacity: .2;fill: #7a7a7a } 
