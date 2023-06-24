@@ -8,10 +8,9 @@
   let registerError = '';
   let reg = false;
   let reged = false;
-  let logined = false;
+  let loggedIn = false;
 
   const handleLogin = async () => {
-    
     try {
       const { user, error } = await supabase.auth.signIn({
         email,
@@ -21,11 +20,11 @@
       if (error) {
         loginError = error.message;
       } else {
-        logined = true;
+        loggedIn = true;
       }
     } catch (error) {
       console.error('登入出錯:', error.message);
-      loginError = '登入出錯 請檢查電郵';
+      loginError = '登入出錯，請檢查電郵和密碼';
     }
   };
 
@@ -58,70 +57,53 @@
 </script>
 
 {#if reg === false}
-
-
-  {#if logined == true}
-    <p>註冊成功 請檢查電郵</p>
+  {#if loggedIn}
+    <p>登入成功，您已經登入</p>
   {/if}
-<main>
-  <h3>會員登入</h3>
-  
   {#if loginError}
     <p>{loginError}</p>
   {/if}
-
-  <form on:submit|preventDefault={handleLogin}>
-    <label>
-      電郵:
-      <input type="text" bind:value={email} required />
-    </label>
-    <label>
-      密碼:
-      <input type="password" bind:value={password} required />
-    </label>
-    <button type="submit"> 登入</button>
-  </form>
-
-  <p class="button" on:click={() => { reg = true; }}>註冊帳戶</p>
-</main>
-
-
-
+  <main>
+    <h3>會員登入</h3>
+    <form on:submit|preventDefault={handleLogin}>
+      <label>
+        電郵:
+        <input type="text" bind:value={email} required />
+      </label>
+      <label>
+        密碼:
+        <input type="password" bind:value={password} required />
+      </label>
+      <button type="submit">登入</button>
+    </form>
+    <p class="button" on:click={() => { reg = true; }}>註冊帳戶</p>
+  </main>
 {:else}
-
-
-
-  {#if reged == true}
-    <p>註冊成功 請檢查電郵</p>
+  {#if reged}
+    <p>註冊成功，請檢查電郵</p>
   {/if}
-<main>
-  <h3>會員註冊</h3>
-  
-  {#if registerError}
-    <p>{registerError}</p>
-  {/if}
-
-  <form on:submit|preventDefault={handleRegister}>
-    <label>
-      用户名:
-      <input type="text" bind:value={username} required />
-    </label>
-    <label>
-      電郵:
-      <input type="text" bind:value={email} required />
-    </label>
-    <label>
-      密碼:
-      <input type="password" bind:value={password} required />
-    </label>
-    <button type="submit">註冊</button>
-  </form>
-
-  <p class="button" on:click={() => { reg = false; }}>登陸帳戶</p>
-</main>
-
-
-
+  <main>
+    <h3>會員註冊</h3>
+    {#if registerError}
+      <p>{registerError}</p>
+    {/if}
+    <form on:submit|preventDefault={handleRegister}>
+      <label>
+        用户名:
+        <input type="text" bind:value={username} required />
+      </label>
+      <label>
+        電郵:
+        <input type="text" bind:value={email} required />
+      </label>
+      <label>
+        密碼:
+        <input type="password" bind:value={password} required />
+      </label>
+      <button type="submit">註冊</button>
+    </form>
+    <p class="button" on:click={() => { reg = false; }}>登陸帳戶</p>
+  </main>
 {/if}
 
 <style>
