@@ -14,7 +14,9 @@
       options: {
         emailRedirectTo: `${location.origin}/auth/callback`,
       },
+      
     })
+    
   }
 
   const handleSignIn = async () => {
