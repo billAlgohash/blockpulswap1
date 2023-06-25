@@ -22,13 +22,6 @@
       loginError = '登入出錯，請檢查電郵和密碼';
     }
   };
-
-  // Check if the URL contains a token and automatically trigger login
-  const urlParams = new URLSearchParams(window.location.search);
-  const token = urlParams.get('token');
-  if (token) {
-    handleLogin();
-  }
 </script>
 
 {#if loggedIn}
