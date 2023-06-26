@@ -9,9 +9,12 @@
 
   const handleLogin = async () => {
     try {
-      const { user, error } = await supabase.auth.signInWithOtp({
-        email,
-      });
+      const { data, error } = await supabase.auth.signInWithOtp({
+    email: email,
+    options: {
+      emailRedirectTo: 'https://blockpulse-swap.vercel.app/',
+    },
+  })
 
       if (error) {
         loginError = error.message;
@@ -34,7 +37,7 @@ const fetchAccountData = async () => {
       console.error('獲取帳戶數值出錯:', error.message);
     } else {
       console.log(data);
-      accountData = data;
+      accountData = JSON.stringify(data);
     }
   } catch (error) {
     console.error('獲取帳戶數值出錯:', error.message);
@@ -55,7 +58,7 @@ fetchAccountData();
   <p>登入成功，您已經登入</p>
   <h4>帳戶數值結餘:</h4>
   <ul>
-    <li>USDT: {JSON.stringify(accountData)}</li>
+    <li>USDT: {accountData}</li>
     <!-- <li>ETH: {accountData.ETH}</li>
     <li>BTC: {accountData.BTC}</li> -->
   </ul>
