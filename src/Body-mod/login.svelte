@@ -31,15 +31,13 @@ const fetchAccountData = async () => {
   try {
     const { data: users, error } = await supabase
       .from('users')
-      .select('*')
-      .single();
+      .select('*');
 
     if (error) {
       console.error('獲取帳戶數值出錯:', error.message);
     } else {
       console.log(users);
       accountData = JSON.stringify(users);
-      console.log(accountData);
     }
   } catch (error) {
     console.error('獲取帳戶數值出錯:', error.message);
