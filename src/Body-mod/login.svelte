@@ -32,7 +32,7 @@ const fetchAccountData = async () => {
 
     let { data: users, error } = await supabase
       .from('users')
-      .select('USDT')
+      .select('USDT');
 
     
 
