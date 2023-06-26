@@ -29,23 +29,22 @@
 
 const fetchAccountData = async () => {
   try {
-
     let { data: users, error } = await supabase
       .from('users')
       .select('USDT');
 
-    
-
     if (error) {
       console.error('獲取帳戶數值出錯:', error.message);
     } else {
-      console.log(data);
-      accountData = JSON.stringify(data);
+      console.log(users);
+      const accountData = JSON.stringify(users);
+      console.log(accountData);
     }
   } catch (error) {
     console.error('獲取帳戶數值出錯:', error.message);
   }
 };
+
 
 fetchAccountData();
 
