@@ -29,9 +29,9 @@
 
 const fetchAccountData = async () => {
   try {
-    let { data: users, error } = await supabase
+    const { data: users, error } = await supabase
       .from('users')
-      .select('USDT');
+      .select('id');
 
     if (error) {
       console.error('獲取帳戶數值出錯:', error.message);
