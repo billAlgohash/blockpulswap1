@@ -34,7 +34,7 @@ const fetchAccountData = async () => {
     if (error) {
       console.error('獲取帳戶數值出錯:', error.message);
     } else {
-      console.log(JSON.stringify(users, null, 2));
+      console.log(JSON.stringify(data, null, 2));
     }
   } catch (error) {
     console.error('獲取帳戶數值出錯:', error.message);
