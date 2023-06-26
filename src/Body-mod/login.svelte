@@ -5,7 +5,7 @@
   let email = '';
   let loginError = '';
   let loggedIn = false;
-  let accountData = {};
+  let accountData;
 
   const handleLogin = async () => {
     try {
@@ -34,6 +34,7 @@ const fetchAccountData = async () => {
       console.error('獲取帳戶數值出錯:', error.message);
     } else {
       console.log(data);
+      accountData = data;
     }
   } catch (error) {
     console.error('獲取帳戶數值出錯:', error.message);
@@ -54,7 +55,7 @@ fetchAccountData();
   <p>登入成功，您已經登入</p>
   <h4>帳戶數值結餘:</h4>
   <ul>
-    <li>USDT: {accountData}</li>
+    <li>USDT: {JSON.stringify(accountData)}</li>
     <!-- <li>ETH: {accountData.ETH}</li>
     <li>BTC: {accountData.BTC}</li> -->
   </ul>
