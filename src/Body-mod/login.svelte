@@ -1,10 +1,11 @@
 <script>
   import { supabase } from "../lib/supabaseClient";
+  import { onMount } from "svelte";
 
   let email = '';
-  let password = '';
   let loginError = '';
   let loggedIn = false;
+  let accountData = {};
 
   const handleLogin = async () => {
     try {
@@ -22,10 +23,40 @@
       loginError = '登入出錯，請檢查電郵和密碼';
     }
   };
+
+const fetchAccountData = async () => {
+  try {
+    const { data, error } = await supabase
+      .from('users')
+      .select();
+
+
+    if (error) {
+      console.error('獲取帳戶數值出錯:', error.message);
+    } else {
+      console.log(JSON.stringify(users, null, 2));
+    }
+  } catch (error) {
+    console.error('獲取帳戶數值出錯:', error.message);
+  }
+};
+
+
+
+
+  onMount(() => {
+    fetchAccountData();
+  });
 </script>
 
 {#if loggedIn}
   <p>登入成功，您已經登入</p>
+  <h4>帳戶數值結餘:</h4>
+  <ul>
+    <li>USDT: {accountData}</li>
+    <!-- <li>ETH: {accountData.ETH}</li>
+    <li>BTC: {accountData.BTC}</li> -->
+  </ul>
 {:else}
   {#if loginError}
     <p>{loginError}</p>
@@ -37,10 +68,6 @@
         電郵:
         <input type="text" bind:value={email} required />
       </label>
-      <!-- <label>
-        密碼:
-        <input type="password" bind:value={password} required />
-      </label> -->
       <button type="submit">登入</button>
     </form>
   </main>
