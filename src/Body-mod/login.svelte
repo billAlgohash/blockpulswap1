@@ -45,7 +45,7 @@ const fetchAccountData = async () => {
   }
 };
 
-const session = await supabase.auth.getSession();
+
 
 fetchAccountData();
 
@@ -61,7 +61,7 @@ fetchAccountData();
   <p>登入成功，您已經登入</p>
   <h4>帳戶數值結餘:</h4>
   <ul>
-    <li>USDT: {accountData} {session}</li>
+    <li>USDT: {accountData}</li>
     <!-- <li>ETH: {accountData.ETH}</li>
     <li>BTC: {accountData.BTC}</li> -->
   </ul>
