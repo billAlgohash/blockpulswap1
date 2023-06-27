@@ -1,4 +1,3 @@
-// src/routes/login.svelte
 <script>
   import { supabase } from '../lib/supabaseClient';
   import { onMount } from 'svelte';
@@ -64,7 +63,6 @@
 </script>
 
 
-// src/routes/login.svelte
 {#if loggedIn}
   <p>登入成功，您已經登入</p>
   <h4>帳戶數值結餘:</h4>
