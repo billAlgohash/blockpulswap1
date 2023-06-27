@@ -1,6 +1,6 @@
 <script>
-  import { supabase } from '../lib/supabaseClient';
-  import { onMount } from 'svelte';
+  import { supabase } from "../lib/supabaseClient";
+  import { onMount } from "svelte";
   import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
 
   let email = '';
@@ -10,12 +10,12 @@
 
   const handleLogin = async () => {
     try {
-      const { error } = await supabase.auth.signInWithOtp({
-        email: email,
-        options: {
-          emailRedirectTo: 'https://blockpulse-swap.vercel.app/',
-        },
-      });
+      const { data, error } = await supabase.auth.signInWithOtp({
+    email: email,
+    options: {
+      emailRedirectTo: 'https://blockpulse-swap.vercel.app/',
+    },
+  })
 
       if (error) {
         loginError = error.message;
@@ -37,8 +37,8 @@
       }
 
       const supabaseClient = createSupabaseServerClient({
-        supabaseUrl: PUBLIC_SUPABASE_URL,
-        supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
+        supabaseUrl: 'https://amvtkeyfaduowfkbviyl.supabase.co',
+        supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtdnRrZXlmYWR1b3dma2J2aXlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODc2MDEzMTUsImV4cCI6MjAwMzE3NzMxNX0.n6XWDgimQY161SzrgcC9nSOzTAhMYHnstACz8nGtOVE',
         session: session,
       });
 
@@ -57,11 +57,16 @@
     }
   };
 
-  onMount(async () => {
-    await fetchAccountData();
+
+fetchAccountData();
+
+
+
+
+  onMount(() => {
+    fetchAccountData();
   });
 </script>
-
 
 {#if loggedIn}
   <p>登入成功，您已經登入</p>
@@ -86,7 +91,6 @@
     </form>
   </main>
 {/if}
-
 
 <style>
   main {
