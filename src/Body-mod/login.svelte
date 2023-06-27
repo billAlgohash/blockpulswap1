@@ -1,6 +1,8 @@
+// src/routes/login.svelte
 <script>
-  import { supabase } from "../lib/supabaseClient";
-  import { onMount } from "svelte";
+  import { supabase } from '../lib/supabaseClient';
+  import { onMount } from 'svelte';
+  import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
 
   let email = '';
   let loginError = '';
@@ -9,12 +11,12 @@
 
   const handleLogin = async () => {
     try {
-      const { data, error } = await supabase.auth.signInWithOtp({
-    email: email,
-    options: {
-      emailRedirectTo: 'https://blockpulse-swap.vercel.app/',
-    },
-  })
+      const { error } = await supabase.auth.signInWithOtp({
+        email: email,
+        options: {
+          emailRedirectTo: 'https://blockpulse-swap.vercel.app/',
+        },
+      });
 
       if (error) {
         loginError = error.message;
@@ -27,34 +29,42 @@
     }
   };
 
-const fetchAccountData = async () => {
-  try {
-    const { data: users, error } = await supabase
-      .from('users')
-      .select('*');
+  const fetchAccountData = async () => {
+    try {
+      const session = await supabase.auth.getSession();
+      if (!session) {
+        loggedIn = false;
+        return;
+      }
 
-    if (error) {
+      const supabaseClient = createSupabaseServerClient({
+        supabaseUrl: PUBLIC_SUPABASE_URL,
+        supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
+        session: session,
+      });
+
+      const { data: users, error } = await supabaseClient
+        .from('users')
+        .select('*');
+
+      if (error) {
+        console.error('獲取帳戶數值出錯:', error.message);
+      } else {
+        console.log(users);
+        accountData = JSON.stringify(users);
+      }
+    } catch (error) {
       console.error('獲取帳戶數值出錯:', error.message);
-    } else {
-      console.log(users);
-      accountData = JSON.stringify(users);
     }
-  } catch (error) {
-    console.error('獲取帳戶數值出錯:', error.message);
-  }
-};
+  };
 
-
-fetchAccountData();
-
-
-
-
-  onMount(() => {
-    fetchAccountData();
+  onMount(async () => {
+    await fetchAccountData();
   });
 </script>
 
+
+// src/routes/login.svelte
 {#if loggedIn}
   <p>登入成功，您已經登入</p>
   <h4>帳戶數值結餘:</h4>
@@ -78,6 +88,7 @@ fetchAccountData();
     </form>
   </main>
 {/if}
+
 
 <style>
   main {
