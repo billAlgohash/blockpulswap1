@@ -28,35 +28,24 @@
     }
   };
 
-  const fetchAccountData = async () => {
-    try {
-      const session = await supabase.auth.getSession();
-      if (!session) {
-        loggedIn = false;
-        return;
-      }
+const fetchAccountData = async () => {
+  try {
+    const { data: users, error } = await supabase
+      .from('users')
+      .select('*');
 
-      const supabaseClient = createSupabaseServerClient({
-        supabaseUrl: 'https://amvtkeyfaduowfkbviyl.supabase.co',
-        supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtdnRrZXlmYWR1b3dma2J2aXlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODc2MDEzMTUsImV4cCI6MjAwMzE3NzMxNX0.n6XWDgimQY161SzrgcC9nSOzTAhMYHnstACz8nGtOVE',
-        session: session,
-      });
-
-      const { data: users, error } = await supabaseClient
-        .from('users')
-        .select('*');
-
-      if (error) {
-        console.error('獲取帳戶數值出錯:', error.message);
-      } else {
-        console.log(users);
-        accountData = JSON.stringify(users);
-      }
-    } catch (error) {
+    if (error) {
       console.error('獲取帳戶數值出錯:', error.message);
+    } else {
+      console.log(users);
+      accountData = JSON.stringify(users);
     }
-  };
+  } catch (error) {
+    console.error('獲取帳戶數值出錯:', error.message);
+  }
+};
 
+const session = await supabase.auth.getSession();
 
 fetchAccountData();
 
@@ -72,7 +61,7 @@ fetchAccountData();
   <p>登入成功，您已經登入</p>
   <h4>帳戶數值結餘:</h4>
   <ul>
-    <li>USDT: {accountData}</li>
+    <li>USDT: {accountData} {session}</li>
     <!-- <li>ETH: {accountData.ETH}</li>
     <li>BTC: {accountData.BTC}</li> -->
   </ul>
