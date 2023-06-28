@@ -1,5 +1,5 @@
 <script>
-	import { getUser, signIn, signOut} from '../lib/services.js'
+	import { signIn, signOut } from '../lib/services.js'
   import { supabase } from "../lib/supabase";
   import { onMount } from "svelte";
   import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
@@ -9,7 +9,18 @@
   let loggedIn = false;
   let accountData;
 
-  // const user = supabase.auth.user();
+  function checkUser() {
+    const user = supabase.auth.user();
+
+    if (!user) {
+      return null;
+    }
+
+    // 檢查使用者物件的其他屬性以確認有效性
+    // 例如: user.id, user.email, user.session
+
+    return user;
+  }
 
   const handleLogin = async () => {
     try {
@@ -54,7 +65,7 @@ fetchAccountData();
     fetchAccountData();
   });
 </script>
-
+<h3>{checkUser()}</h3>
 {#if loggedIn}
   <p>登入成功，您已經登入</p>
   <h4>帳戶數值結餘:</h4>
