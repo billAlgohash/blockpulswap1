@@ -1,35 +1,14 @@
 <script>
   import { onMount } from 'svelte';
-  import { createSupabaseClient } from '@supabase/supabase-js';
+  // import { createSupabaseClient } from '@supabase/supabase-js';
   import RAQ from './Body-mod/read-and-quote.svelte';
   import LAND from './Body-mod/landing_page.svelte';
   import CP from './Body-mod/client_portal.svelte';
-  import Login from './Body-mod/login.svelte';
-
-  const PUBLIC_SUPABASE_URL = 'https://amvtkeyfaduowfkbviyl.supabase.co';
-  const PUBLIC_SUPABASE_ANON_KEY = 'YOUR_ANON_KEY'; // 替換為你自己的 Supabase 匿名金鑰
+  import Login from './lib/Login.svelte';
 
   let page = 1;
   let session = null;
 
-  const supabase = createSupabaseClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY);
-
-  onMount(() => {
-    const { data: initialSession } = supabase.auth.session();
-    session = initialSession;
-
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN') {
-        session = session;
-      } else if (event === 'SIGNED_OUT') {
-        session = null;
-      }
-    });
-
-    return () => {
-      authListener.unsubscribe();
-    };
-  });
 </script>
 
 <div class="list">
@@ -38,15 +17,16 @@
   <p class:active={page === 3} on:click={() => { page = 3; }}>Portal</p>
   <p class:active={page === 4} on:click={() => { page = 4; }}>Traders</p>
 </div>
-<h3>{session}</h3>
+
+
 {#if page === 1 }
-  <LAND session={session} />
+  <LAND />
 {:else if page === 2 }
-  <RAQ session={session} />
+  <RAQ />
 {:else if page === 3 }
-  <CP session={session} />
+  <CP />
 {:else if page === 4 }
-  <Login session={session} />
+  <Login />
 {/if}
 
 <style>

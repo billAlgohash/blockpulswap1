@@ -1,7 +1,7 @@
 <script>
   import { currentUser, pb } from './pocketbase';
-  let username : string;
-  let password : string;
+  let username = "";
+  let password = "";
 
   async function login(){
     await pb.collection('trader').authWithPassword(username,password);
