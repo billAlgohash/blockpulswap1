@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { supabase } from "../lib/supabaseClient";
+  import { supabase } from "../lib/supabase";
 
   let user;
   let balances = {};

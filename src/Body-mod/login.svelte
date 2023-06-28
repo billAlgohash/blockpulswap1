@@ -1,5 +1,5 @@
 <script>
-  import { supabase } from "../lib/supabaseClient";
+  import { supabase } from "../lib/supabase";
   import { onMount } from "svelte";
   import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
 
