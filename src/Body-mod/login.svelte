@@ -9,7 +9,7 @@
   let loggedIn = false;
   let accountData;
 
-const userStore = writable();
+// const userStore = writable();
 
 supabase.auth.getSession().then(({ data }) => {
 	userStore.set(data.session?.user);
@@ -23,15 +23,15 @@ supabase.auth.onAuthStateChange((event, session) => {
 	}
 });
 
-	user() {
-		return userStore;
-	};
-	signIn(email) {
-		return supabase.auth.signInWithOtp({ email });
-	};
-	signOut() {
-		return supabase.auth.signOut();
-	};
+	// user() {
+	// 	return userStore;
+	// };
+	// signIn(email) {
+	// 	return supabase.auth.signInWithOtp({ email });
+	// };
+	// signOut() {
+	// 	return supabase.auth.signOut();
+	// };
 
   const handleLogin = async () => {
     try {
