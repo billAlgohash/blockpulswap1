@@ -1,38 +1,36 @@
 <script>
-  import RAQ from './Body-mod/read-and-quote.svelte'
-  import LAND from './Body-mod/landing_page.svelte'
-  import CP from './Body-mod/client_portal.svelte'
-  import Login from './Body-mod/login.svelte'
+  import { onMount } from 'svelte';
+  import { createSupabaseClient } from '@supabase/supabase-js';
+  import RAQ from './Body-mod/read-and-quote.svelte';
+  import LAND from './Body-mod/landing_page.svelte';
+  import CP from './Body-mod/client_portal.svelte';
+  import Login from './Body-mod/login.svelte';
 
-const  PUBLIC_SUPABASE_URL = 'https://amvtkeyfaduowfkbviyl.supabase.co'
-const  PUBLIC_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtdnRrZXlmYWR1b3dma2J2aXlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODc2MDEzMTUsImV4cCI6MjAwMzE3NzMxNX0.n6XWDgimQY161SzrgcC9nSOzTAhMYHnstACz8nGtOVE'
-import { createSupabaseLoadClient } from '@supabase/auth-helpers-sveltekit'
-
-export const load = async ({ fetch, data, depends }) => {
-  depends('supabase:auth')
-
-  const supabase = createSupabaseLoadClient({
-    supabaseUrl: PUBLIC_SUPABASE_URL,
-    supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
-    event: { fetch },
-    serverSession: data.session,
-  })
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
-  return { supabase, session }
-}
-
-
-
+  const PUBLIC_SUPABASE_URL = 'https://amvtkeyfaduowfkbviyl.supabase.co';
+  const PUBLIC_SUPABASE_ANON_KEY = 'YOUR_ANON_KEY'; // 替換為你自己的 Supabase 匿名金鑰
 
   let page = 1;
+  let session = null;
 
+  const supabase = createSupabaseClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY);
+
+  onMount(() => {
+    const { data: initialSession } = supabase.auth.session();
+    session = initialSession;
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN') {
+        session = session;
+      } else if (event === 'SIGNED_OUT') {
+        session = null;
+      }
+    });
+
+    return () => {
+      authListener.unsubscribe();
+    };
+  });
 </script>
-
-<h3>{$$props.session}</h3>
 
 <div class="list">
   <p class:active={page === 1} on:click={() => { page = 1; }}>Home</p>
@@ -40,19 +38,16 @@ export const load = async ({ fetch, data, depends }) => {
   <p class:active={page === 3} on:click={() => { page = 3; }}>Portal</p>
   <p class:active={page === 4} on:click={() => { page = 4; }}>Traders</p>
 </div>
-
-<h3>{$$props.session}</h3>
-{#if page===1 }
-  <LAND/>
-{:else if page===2 }
-  <RAQ/>
-{:else if page===3 }
-  <CP/>
-{:else if page===4 }
-  <Login/>
+<h3>{session}</h3>
+{#if page === 1 }
+  <LAND session={session} />
+{:else if page === 2 }
+  <RAQ session={session} />
+{:else if page === 3 }
+  <CP session={session} />
+{:else if page === 4 }
+  <Login session={session} />
 {/if}
-
-
 
 <style>
   .list {

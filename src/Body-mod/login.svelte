@@ -74,6 +74,7 @@ fetchAccountData();
 
   onMount(() => {
     fetchAccountData();
+    
   });
 </script>
 
