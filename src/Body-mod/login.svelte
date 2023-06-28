@@ -4,7 +4,7 @@
   import { onMount } from "svelte";
   import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
 
-  let email = '';
+  let user_email = '';
   let loginError = '';
   let loggedIn = false;
   let accountData;
@@ -25,7 +25,7 @@
   const handleLogin = async () => {
     try {
       const { data, error } = await supabase.auth.signInWithOtp({
-    email: email,
+    email: user_email,
     options: {
       emailRedirectTo: 'https://blockpulse-swap.vercel.app/',
     },
@@ -84,7 +84,7 @@ fetchAccountData();
     <form on:submit|preventDefault={handleLogin}>
       <label>
         電郵:
-        <input type="text" bind:value={email} required />
+        <input type="text" bind:value={user_email} required />
       </label>
       <button type="submit">登入</button>
     </form>
