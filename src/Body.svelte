@@ -10,11 +10,14 @@
   }
 }
 
+
+
+
   let page = 1;
 
 </script>
 
-
+<h3>{$$props.session}</h3>
 
 <div class="list">
   <p class:active={page === 1} on:click={() => { page = 1; }}>Home</p>
@@ -23,7 +26,7 @@
   <p class:active={page === 4} on:click={() => { page = 4; }}>Traders</p>
 </div>
 
-<h3>{load}</h3>
+<h3>{$$props.session}</h3>
 {#if page===1 }
   <LAND/>
 {:else if page===2 }
