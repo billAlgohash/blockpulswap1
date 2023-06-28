@@ -29,7 +29,7 @@
   <p>Signed in as {$currentUser.username}</p>
   <button on:click={signOut}>Sign Out</button>
 {:else}
-  <form>
+  <form on:submit|preventDefault>
   <input placeholder="username" type="text" bind:value={username}/>
   <input placeholder="password" type="password" bind:value={password}/>
   <button on:click={signUp}>Sign Up</button>
