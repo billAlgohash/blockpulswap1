@@ -3,21 +3,21 @@
 	import Error from '../lib/Error.svelte'
 
   // redirect if already logged in
-	const user = getUser()
-	if (user) goto('/')
+	const user = getUser();
 
-  let email = 'your@gmail.com'
+  let email = 'your@gmail.com';
 
-  let signInPromise = Promise.resolve({})
+  let signInPromise = Promise.resolve({});
+
   function handleSignIn() {
     signInPromise = signIn({email})
   }
 </script>
 
-{#if user}
-{/if}
+<!-- {#if user}
+{/if} -->
 
-{#await signInPromise}
+<!-- {#await signInPromise}
   Sending magic link to {email}
 {:then {data, error}}
   <Error {error} />
@@ -34,4 +34,4 @@
       </div>
     </form>
   {/if}
-{/await}
+{/await} -->
