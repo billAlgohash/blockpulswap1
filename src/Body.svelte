@@ -25,8 +25,8 @@
   <RAQ />
 {:else if page === 3 }
   <CP />
-{:else if page === 4 }
-  <Login />
+<!-- {:else if page === 4 }
+  <Login /> -->
 {/if}
 
 <style>
