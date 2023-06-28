@@ -1,105 +1,37 @@
 <script>
-  import { supabase } from "../lib/supabase";
-  import { onMount } from "svelte";
-  import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
+	import {getUser, signIn} from '../lib/services.js'
+	import Error from '../lib/Error.svelte'
 
-  let email = '';
-  let loginError = '';
-  let loggedIn = false;
-  let accountData;
+  // redirect if already logged in
+	const user = getUser()
+	if (user) goto('/')
 
-  const handleLogin = async () => {
-    try {
-      const { data, error } = await supabase.auth.signInWithOtp({
-    email: email,
-    options: {
-      emailRedirectTo: 'https://blockpulse-swap.vercel.app/',
-    },
-  })
+  let email = 'your@gmail.com'
 
-      if (error) {
-        loginError = error.message;
-      } else {
-        loggedIn = true;
-      }
-    } catch (error) {
-      console.error('登入出錯:', error.message);
-      loginError = '登入出錯，請檢查電郵和密碼';
-    }
-  };
-
-const fetchAccountData = async () => {
-  try {
-    const { data: users, error } = await supabase
-      .from('users')
-      .select('*');
-
-    if (error) {
-      console.error('獲取帳戶數值出錯:', error.message);
-    } else {
-      console.log(users);
-      accountData = JSON.stringify(users);
-    }
-  } catch (error) {
-    console.error('獲取帳戶數值出錯:', error.message);
+  let signInPromise = Promise.resolve({})
+  function handleSignIn() {
+    signInPromise = signIn({email})
   }
-};
-
-
-
-fetchAccountData();
-
-
-
-
-  onMount(() => {
-    fetchAccountData();
-  });
 </script>
 
-{#if loggedIn}
-  <p>登入成功，您已經登入</p>
-  <h4>帳戶數值結餘:</h4>
-  <ul>
-    <li>USDT: {accountData}</li>
-    <!-- <li>ETH: {accountData.ETH}</li>
-    <li>BTC: {accountData.BTC}</li> -->
-  </ul>
-{:else}
-  {#if loginError}
-    <p>{loginError}</p>
-  {/if}
-  <main>
-    <h3>會員登入</h3>
-    <form on:submit|preventDefault={handleLogin}>
-      <label>
-        電郵:
-        <input type="text" bind:value={email} required />
-      </label>
-      <button type="submit">登入</button>
-    </form>
-  </main>
+{#if user}
 {/if}
 
-<style>
-  main {
-    text-align: center;
-    padding: 20px;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    margin: 0 auto;
-  }
-
-  label {
-    margin-bottom: 10px;
-  }
-
-  input {
-    padding: 5px;
-    width: 100%;
-  }
-</style>
+{#await signInPromise}
+  Sending magic link to {email}
+{:then {data, error}}
+  <Error {error} />
+  {#if data}
+    <strong class="text-green-600">Successfully sent magic link to {email}!</strong>
+  {:else}
+    <form class="form-control" on:submit|preventDefault={handleSignIn}>
+      <label for="email" class="label">
+        <span class="label-text text-4xl">Login to Qwitter!</span>
+      </label> 
+      <div class="relative">
+        <input bind:value={email} id="email" type="email" placeholder="Email" required class="w-full pr-16 input input-primary input-bordered"> 
+        <button class="absolute top-0 right-0 rounded-l-none btn btn-primary">Get Magic Link!</button>
+      </div>
+    </form>
+  {/if}
+{/await}
