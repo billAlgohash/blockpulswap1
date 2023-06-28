@@ -14,10 +14,10 @@
   }
 </script>
 
-<!-- {#if user}
-{/if} -->
+{#if user}
+{/if}
 
-<!-- {#await signInPromise}
+{#await signInPromise}
   Sending magic link to {email}
 {:then {data, error}}
   <Error {error} />
@@ -34,4 +34,4 @@
       </div>
     </form>
   {/if}
-{/await} -->
+{/await}
