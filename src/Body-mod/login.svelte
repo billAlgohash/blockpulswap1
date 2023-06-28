@@ -9,18 +9,29 @@
   let loggedIn = false;
   let accountData;
 
-  function checkUser() {
-    const user = supabase.auth.user();
+const userStore = writable();
 
-    if (!user) {
-      return null;
-    }
+supabase.auth.getSession().then(({ data }) => {
+	userStore.set(data.session?.user);
+});
 
-    // 檢查使用者物件的其他屬性以確認有效性
-    // 例如: user.id, user.email, user.session
+supabase.auth.onAuthStateChange((event, session) => {
+	if (event == 'SIGNED_IN' && session) {
+		userStore.set(session.user);
+	} else if (event == 'SIGNED_OUT') {
+		userStore.set(null);
+	}
+});
 
-    return user;
-  }
+	user() {
+		return userStore;
+	};
+	signIn(email) {
+		return supabase.auth.signInWithOtp({ email });
+	};
+	signOut() {
+		return supabase.auth.signOut();
+	};
 
   const handleLogin = async () => {
     try {
@@ -66,7 +77,7 @@ fetchAccountData();
   });
 </script>
 
-
+<!-- <h3>{session}</h3> -->
 {#if loggedIn}
   <p>登入成功，您已經登入</p>
   <h4>帳戶數值結餘:</h4>
