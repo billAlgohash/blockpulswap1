@@ -65,7 +65,8 @@ fetchAccountData();
     fetchAccountData();
   });
 </script>
-<h3>{checkUser()}</h3>
+
+
 {#if loggedIn}
   <p>登入成功，您已經登入</p>
   <h4>帳戶數值結餘:</h4>
