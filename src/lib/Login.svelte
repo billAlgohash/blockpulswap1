@@ -14,6 +14,7 @@
         username,
         password,
         passwordConfirm: password,
+        name: 'Hi mom!',
       };
       const createdUser = await pb.collection('trader').create(data);
       await login();
