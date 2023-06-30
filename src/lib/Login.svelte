@@ -39,6 +39,24 @@
 
 <style>
 
+  p {
+    will-change: filter;
+    transition: filter 300ms;
+  }
+  p:hover {
+    color: white;
+    filter: drop-shadow(0 0 1em gold);
+  }
+
+  h3 {
+    will-change: filter;
+    transition: filter 300ms;
+  }
+  h3:hover {
+    color: gold;
+    filter: drop-shadow(0 0 1em gold);
+  }
+
   main{
     margin-top:100px;
   }
