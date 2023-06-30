@@ -30,7 +30,7 @@
 </script>
 
 {#if $currentUser}
-    <p>Signed in as {$currentUser.username}</p>
+    <h3>Signed in as {$currentUser.username}.</h3>
     <p>USDT : {$currentUser.USDT}</p>
     <p>BTC : {$currentUser.BTC}</p>
     <p>ETH : {$currentUser.ETH}</p>
