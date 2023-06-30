@@ -149,6 +149,12 @@ input:hover {
   color: #ffffff;
   filter: drop-shadow(0 0 1em #ffffffaa)
 }
+.big-container {
+  margin: 3%;
+  width: 90%;
+  border: 1px solid #8CFFFB;
+  border-radius: 14px;
+}
 
 
 @keyframes fade {
