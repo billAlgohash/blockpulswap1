@@ -93,29 +93,6 @@
 
 
 <style>
-.container-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 120px;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 100%;
-  gap: 0.1em;
-  padding: 0.3em;
-  border-radius: 14px;
-}
-
-.new-container {
-  animation: fade 0.4s;
-  transition: opacity 0.4s;
-  margin-top: 1em;
-  text-align: center;
-}
 
 .content {
   display: flex;
@@ -195,20 +172,6 @@ input:hover {
   background-color: #8CFFFB;
   transition: width 1s linear;
   filter: drop-shadow(0 0 1em #8CFFFBaa)
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.loading-spinner {
-  border: 6px solid #242526;
-  border-top: 6px solid #8CFFFB;
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
 }
 </style>
 

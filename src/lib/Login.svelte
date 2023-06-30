@@ -37,13 +37,13 @@
     <button on:click={signOut}>Sign Out</button>
 {:else}
   <form on:submit|preventDefault>
-    <input
+    <input class="container"
       placeholder="Username"
       type="text"
       bind:value={username}
     />
 
-    <input 
+    <input class="container"
       placeholder="Password" 
       type="password" 
       bind:value={password} 
