@@ -43,13 +43,6 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 100vh;
-  }
-
-  .big-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .container {
@@ -101,18 +94,20 @@
   }
 </style>
 
-<div class="center">
+<div class="big-container"><div class="center">
   {#if isLoading}
     <div class="loading-spinner"></div>
   {:else}
     {#if $currentUser}
+      <div class="center">
       <h3>Signed in as {$currentUser.username}.</h3>
       <p>USDT : {$currentUser.USDT}</p>
       <p>BTC : {$currentUser.BTC}</p>
       <p>ETH : {$currentUser.ETH}</p>
-      <br><button on:click={signOut}>Sign Out</button>
+      <br><RAQ/>
+      <br><button on:click={signOut}>Sign Out</button><br>
+      </div>
     {:else}
-      <div class="big-container">
         <div class="container">
           <form on:submit|preventDefault>
             <input class="container" placeholder="Username" type="text" bind:value={username} />
@@ -121,10 +116,7 @@
             <button class="button" on:click={login}>Login</button>
           </form>
         </div>
-      </div>
     {/if}
   {/if}
-
-  <br><RAQ/>
   
-</div>
+</div></div>

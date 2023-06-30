@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
 
   let act =  ['買入', '賣出'];
-  let fiat = ['HKD', 'USD'];
+  let fiat = ['HKD', 'USD', 'JPY', 'KRW'];
   let crypto = ['BTC', 'ETH', 'USDT'];
 
   let actOption = act[0];  
@@ -214,23 +214,23 @@ input:hover {
 
       </div>
       {#if showNewContainer}
-<div class="content">
-  <div class="progress-bar">
-    <div class="progress-bar-inner" style="width: {countdown*3}%;"/>
-    <p> 此報價尚餘：{countdown} 秒</p>
-    {#if actOption === '買入'}
-      <p style="margin: 30px 33px;">使用 ${sys} {fiatOption}</p>
-      <h4 class="white" style="margin: 30px 33px;">{actOption} {inputValue} 個 {cryptoOption}</h4>
-    {:else}
-      <p style="margin: 30px 33px;">{actOption} {inputValue} 個 {cryptoOption}</p>
-      <h4 class="white" style="margin: 30px 33px;">獲得 ${sys} {fiatOption}</h4>
-    {/if}
-    <button  style="margin: 15px 33px;" class="execute-button" on:click={() => {showNewContainer = false;}}>取消</button>
-    <button style="margin: 15px 33px;" class="execute-button" on:click={() => {executeOrder(); createNewContainer();}}>執行</button>
-    <div style="display: flex; justify-content: space-between; width: 100%;">
-    </div>
-  </div>
-</div>
+      <div class="content">
+        <div class="progress-bar">
+          <div class="progress-bar-inner" style="width: {countdown*3}%;"/>
+          <p> 此報價尚餘：{countdown} 秒</p>
+          {#if actOption === '買入'}
+            <p style="margin: 30px 33px;">使用 ${sys} {fiatOption}</p>
+            <h4 class="white" style="margin: 30px 33px;">{actOption} {inputValue} 個 {cryptoOption}</h4>
+          {:else}
+            <p style="margin: 30px 33px;">{actOption} {inputValue} 個 {cryptoOption}</p>
+            <h4 class="white" style="margin: 30px 33px;">獲得 ${sys} {fiatOption}</h4>
+          {/if}
+          <button  style="margin: 15px 33px;" class="execute-button" on:click={() => {showNewContainer = false;}}>取消</button>
+          <button style="margin: 15px 33px;" class="execute-button" on:click={() => {executeOrder(); createNewContainer();}}>執行</button>
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+          </div>
+        </div>
+      </div>
 
       {:else}
         <button on:click={fetchData}>報價</button>
