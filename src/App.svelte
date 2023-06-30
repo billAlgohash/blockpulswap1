@@ -9,7 +9,7 @@
 
 <main>
 
-  <Body/><Header/><Login/>
+  <Body/><Header/>
 
 </main>
 

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { currentUser, pb } from './pocketbase';
+  import RAQ from '../Body-mod/read-and-quote.svelte';
 
   let username: string;
   let password: string;
@@ -109,7 +110,7 @@
       <p>USDT : {$currentUser.USDT}</p>
       <p>BTC : {$currentUser.BTC}</p>
       <p>ETH : {$currentUser.ETH}</p>
-      <button on:click={signOut}>Sign Out</button>
+      <br><button on:click={signOut}>Sign Out</button>
     {:else}
       <div class="big-container">
         <div class="container">
@@ -123,4 +124,7 @@
       </div>
     {/if}
   {/if}
+
+  <br><RAQ/>
+  
 </div>
