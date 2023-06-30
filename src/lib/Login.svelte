@@ -58,8 +58,17 @@ red{
     margin-right: 2.5em;
     align-items: center;
     justify-content: center;
+    /* transition: height 1s ease-in-out;
+    transition: width 1s ease-in-out;
+    transition: opacity 1s ease-in-out; */
   }
 
+
+  /* .big-container {
+    transition: height 1s ease-in-out;
+    transition: width 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+  } */
 
   input {
     text-align: center;
@@ -104,6 +113,9 @@ red{
     z-index: 999;
   }
 </style>
+
+
+
 <main background="#000000">
 <div class="big-container" in:fade><div class="center">
   {#if isLoading}
