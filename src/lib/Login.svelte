@@ -70,8 +70,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 300px;
-    min-width: 300px;
+    min-height: 290px;
+    min-width: 290px;
   }
 
   .container {
