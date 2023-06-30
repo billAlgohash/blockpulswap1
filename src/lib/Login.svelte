@@ -38,6 +38,12 @@
 </script>
 
 <style>
+main{
+  margin-top:100px;
+}
+red{
+  color: red;
+}
   .center {
     display: flex;
     flex-direction: column;
@@ -53,6 +59,7 @@
     align-items: center;
     justify-content: center;
   }
+
 
   input {
     text-align: center;
@@ -97,10 +104,10 @@
     z-index: 999;
   }
 </style>
-
+<main background="#000000">
 <div class="big-container" in:fade><div class="center">
   {#if isLoading}
-    <div class="loading-spinner"></div>
+    <div class="loading-spinner" in:fade></div>
   {:else}
     {#if $currentUser}
       <div class="center" in:fade>
@@ -109,7 +116,7 @@
       <p>BTC : {$currentUser.BTC}</p>
       <p>ETH : {$currentUser.ETH}</p>
       <br><RAQ/>
-      <br><button on:click={signOut}>Sign Out</button><br>
+      <br><button on:click={signOut}><red>Sign Out</red></button><br>
       </div>
     {:else}
         <div class="container" in:fade>
@@ -124,3 +131,4 @@
   {/if}
   
 </div></div>
+</main>
