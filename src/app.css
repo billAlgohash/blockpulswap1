@@ -86,7 +86,7 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   padding: 0.6em;
-  border: 1px solid #000000;
+  border: 8px solid #000000;
   border-radius: 14px;
 }
 @media (prefers-color-scheme: light) {
