@@ -112,17 +112,11 @@ red{
     bottom: 0;
     z-index: 999;
   }
-  .bg_black{
-    background-color: #000000;
-  }
-  .bg_bp{
-    background-color: #242526;
-  }
 </style>
 
 
 
-<main class="bg_black">
+<main>
 <div class="big-container" in:fade><div class="center">
   {#if isLoading}
     <div class="loading-spinner" in:fade></div>
@@ -133,7 +127,7 @@ red{
       <p>USDT : {$currentUser.USDT}</p>
       <p>BTC : {$currentUser.BTC}</p>
       <p>ETH : {$currentUser.ETH}</p>
-      <br><div class="bg_bp"><RAQ/></div>
+      <br><RAQ/>
       <br><button on:click={signOut}><red>Sign Out</red></button><br>
       </div>
     {:else}
