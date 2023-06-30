@@ -40,6 +40,7 @@
 <style>
 
   p {
+    margin: 1.4em;
     will-change: filter;
     transition: filter 300ms;
   }
