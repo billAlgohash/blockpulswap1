@@ -49,6 +49,7 @@
   }
 
   h3 {
+    color: white;
     will-change: filter;
     transition: filter 300ms;
   }
@@ -70,7 +71,7 @@
     justify-content: center;
     text-align: center;
     min-height: 300px;
-    min-width: 400px;
+    min-width: 300px;
   }
 
   .container {
@@ -121,7 +122,7 @@
   {:else}
     {#if $currentUser}
       <div class="center" in:fade>
-      <h3>Signed in as {$currentUser.username}.</h3>
+      <h3>貴帳戶 {$currentUser.username} 已登陸</h3>
       <p>USDT : {$currentUser.USDT}</p>
       <p>BTC : {$currentUser.BTC}</p>
       <p>ETH : {$currentUser.ETH}</p>
@@ -129,10 +130,12 @@
       <br><button on:click={signOut}><red>Sign Out</red></button><br>
       </div>
     {:else}
+        <h3>會員登陸</h3>
         <div class="container" in:fade>
           <form on:submit|preventDefault>
             <input class="container" placeholder="Username" type="text" bind:value={username} />
             <input class="container" placeholder="Password" type="password" bind:value={password} />
+            <br>
             <button class="button" on:click={signUp}>Sign Up</button>
             <button class="button" on:click={login}>Login</button>
           </form>

@@ -12,10 +12,10 @@
 </script>
 
 <div class="list">
-  <p class:active={page === 1} on:click={() => { page = 1; }}>Home</p>
+  <p class:active={page === 1} on:click={() => { page = 1; }}>首頁</p>
   <!-- <p class:active={page === 2} on:click={() => { page = 2; }}>Swap</p>
   <p class:active={page === 3} on:click={() => { page = 3; }}>Portal</p> -->
-  <p in:fade class:active={page === 4} on:click={() => { page = 4; }}>Traders</p>
+  <p class:active={page === 4} on:click={() => { page = 4; }}>會員帳戶系統</p>
 </div>
 
 
@@ -38,7 +38,6 @@
     gap: 30px;
     z-index: 9999;
     display: flex;
-    background-color: #242526;
   }
 
   .list p:hover {
@@ -48,5 +47,8 @@
 
   .active {
     color: white;
+  }
+  p{
+    font-size: 18px;
   }
 </style>
