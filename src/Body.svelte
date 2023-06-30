@@ -4,6 +4,7 @@
   import LAND from './Body-mod/landing_page.svelte';
   import CP from './Body-mod/client_portal.svelte';
   import Login from './lib/Login.svelte';
+  
 
   let page = 1;
   let session = null;
@@ -14,14 +15,14 @@
   <p class:active={page === 1} on:click={() => { page = 1; }}>Home</p>
   <!-- <p class:active={page === 2} on:click={() => { page = 2; }}>Swap</p>
   <p class:active={page === 3} on:click={() => { page = 3; }}>Portal</p> -->
-  <p class:active={page === 4} on:click={() => { page = 4; }}>Traders</p>
+  <p in:fade class:active={page === 4} on:click={() => { page = 4; }}>Traders</p>
 </div>
 
 
 {#if page === 1 }
   <LAND />
-{:else if page === 2 }
-  <RAQ />
+<!-- {:else if page === 2 }
+  <RAQ /> -->
 <!-- {:else if page === 3 }
   <CP /> -->
 {:else if page === 4 }

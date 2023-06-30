@@ -4,6 +4,8 @@
   import Meter from '../lib/meter.svelte'
   import BA from '../lib/bidask.svelte'
   import Refer from '../lib/refer.svelte'
+  import { fade } from 'svelte/transition';
+
   let TT1 = false;
   let TT2 = false;
   let TT3 = false;
@@ -59,7 +61,7 @@
 
 </style>
 
-<div class="big-wrapper">
+<div class="big-wrapper" in:fade>
 
 <p>💼 歡迎體驗更順暢的 OTC 交易 💼</p>
 <p class="small_white">通過 BlockPul​​se OTC 擁抱加密交易的未來。<br>享受實體場所交易的便利和安全。</p><br>
