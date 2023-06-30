@@ -146,8 +146,8 @@
             <input class="container" placeholder="Username" type="text" bind:value={username} />
             <input class="container" placeholder="Password" type="password" bind:value={password} />
             <br>
-            <button class="button" on:click={signUp}>Sign Up</button>
-            <button class="button" on:click={login}>Login</button>
+            <button class="button" on:click={signUp}>登記</button>
+            <button class="button" on:click={login}> 登入</button>
           </form>
         </div>
     {/if}
