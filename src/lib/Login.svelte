@@ -108,7 +108,7 @@
   }
 
   .button {
-    margin-left: 1.6em;
+    margin-left: 2.6em;
   }
 
 </style>
