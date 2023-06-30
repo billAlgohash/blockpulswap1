@@ -14,11 +14,11 @@
   let loading = false;
 
   let showNewContainer = false;
-  let countdown = 30; 
+  let countdown = 15; 
   let countdownInterval;
 
   function startCountdown() {
-    countdown = 30;
+    countdown = 15;
     if (countdownInterval) {
       clearInterval(countdownInterval);
     }
@@ -228,7 +228,7 @@ button{
       {#if showNewContainer}
       <div class="content">
         <div class="progress-bar">
-          <div class="progress-bar-inner" style="width: {countdown*3}%;"/>
+          <div class="progress-bar-inner" style="width: {countdown*6}%;"/>
           <p> 此報價尚餘：{countdown} 秒</p>
           {#if actOption === '買入'}
             <p style="margin: 30px 33px;">使用 ${sys} {fiatOption}</p>
