@@ -101,6 +101,7 @@
 }
 
 .select {
+  font-size: 1em;
   flex: 1;
   max-width: 300px;
   height: 1.6em;
@@ -109,6 +110,7 @@
 }
 
 .select select {
+  font-size: 1em;
   width: 100%;
   height: 100%;
   padding: 4px;
@@ -135,6 +137,7 @@ select:hover {
   color: white;
   text-align: center;
   transition: background-color 0.25s;
+  font-size: 1em;
 }
 input:hover {
   font-weight: bold;
