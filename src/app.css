@@ -79,7 +79,7 @@ button:focus-visible {
   margin-top: 90px;
 }
 .big-container {
-  min-width: 260px;
+  min-width: 280px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

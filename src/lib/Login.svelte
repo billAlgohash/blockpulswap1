@@ -69,6 +69,10 @@
 } */
 
 /* 設定元素間距 */
+
+button{
+  margin-left: 1.6em;
+}
 .container {
   margin-bottom: 1em;
   margin-top: 0.5em;
