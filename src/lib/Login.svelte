@@ -54,7 +54,7 @@
     transition: filter 300ms;
   }
   h3:hover {
-    color: gold;
+    color: #8CFFFB;
     filter: drop-shadow(0 0 1em gold);
   }
 
