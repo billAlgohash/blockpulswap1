@@ -59,18 +59,42 @@
 </div>
 
 <style>  
-.center {
+/* .center {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   height: 100vh;
-}
+} */
 
 /* 設定元素間距 */
 .container {
   margin-bottom: 1em;
   margin-top: 0.5em;
+}
+
+
+input {
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #8CFFFB;
+  padding: 0.6em 1.2em;
+  gap: 1em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: rgba(140, 255, 251, 0.1);
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+input:hover {
+  color: #242526;
+  background-color: rgba(140, 255, 251, 0.9);
+  filter: drop-shadow(0 0 1em #8CFFFBaa)
+}
+input:focus,
+input:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
   </style>
