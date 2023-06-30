@@ -84,7 +84,7 @@
   }
   .con {
     margin: 3%;
-    width: 98%;
+    width: 99%;
     border: 1px solid #8CFFFB;
     border-radius: 14px;
   }

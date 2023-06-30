@@ -151,7 +151,7 @@ input:hover {
 }
 .big-container {
   right: 3%;
-  width: 95%;
+  width: 94%;
   border: 1px solid #8CFFFB;
   border-radius: 14px;
 }
