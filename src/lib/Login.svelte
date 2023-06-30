@@ -30,10 +30,11 @@
 </script>
 
 {#if $currentUser}
-  <p>
-    Signed in as {$currentUser.username} 
+    <p>Signed in as {$currentUser.username}</p>
+    <p>USDT : {$currentUser.USDT}</p>
+    <p>BTC : {$currentUser.BTC}</p>
+    <p>ETH : {$currentUser.ETH}</p>
     <button on:click={signOut}>Sign Out</button>
-  </p>
 {:else}
   <form on:submit|preventDefault>
     <input
