@@ -178,7 +178,6 @@ input:hover {
 <div class="container-wrapper">
   {#if loading}
     <div class="loading-spinner"></div>
-     <p>正在報價...</p>
   {:else}
     <div class="big-container">
       <div class="container">
