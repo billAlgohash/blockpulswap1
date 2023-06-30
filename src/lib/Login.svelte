@@ -59,16 +59,6 @@
 </div>
 
 <style>  
-/* .center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 100vh;
-} */
-
-/* 設定元素間距 */
 
 .button{
   margin-left: 1.6em;
@@ -77,7 +67,6 @@
   margin-bottom: 1em;
   margin-top: 0.5em;
 }
-
 
 input {
   text-align: center;
