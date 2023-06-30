@@ -60,6 +60,7 @@
 
   main{
     margin-top:100px;
+    max-width: 100vw;
   }
   red{
     color: red;
