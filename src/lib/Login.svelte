@@ -82,6 +82,12 @@
     align-items: center;
     justify-content: center;
   }
+  .con {
+    margin: 3%;
+    width: 98%;
+    border: 1px solid #8CFFFB;
+    border-radius: 14px;
+  }
 
   input {
     text-align: center;
@@ -123,10 +129,12 @@
   {:else}
     {#if $currentUser}
       <div class="center" in:fade>
+      <div class="con"> 
       <h3>貴帳戶 {$currentUser.username} 已登陸</h3>
       <p>USDT : {$currentUser.USDT}</p>
       <p>BTC : {$currentUser.BTC}</p>
       <p>ETH : {$currentUser.ETH}</p>
+      </div>
       <br><RAQ/>
       <br><button on:click={signOut}><red>Sign Out</red></button><br>
       </div>

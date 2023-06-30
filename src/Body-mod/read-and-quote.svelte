@@ -150,8 +150,8 @@ input:hover {
   filter: drop-shadow(0 0 1em #ffffffaa)
 }
 .big-container {
-  margin: 3%;
-  width: 90%;
+  right: 3%;
+  width: 95%;
   border: 1px solid #8CFFFB;
   border-radius: 14px;
 }
