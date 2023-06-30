@@ -156,6 +156,10 @@ input:hover {
   border-radius: 14px;
 }
 
+button{
+  margin-bottom: 1em;
+}
+
 
 @keyframes fade {
   from {
