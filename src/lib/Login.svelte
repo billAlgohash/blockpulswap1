@@ -51,8 +51,8 @@
           type="password" 
           bind:value={password} 
         />
-        <button on:click={signUp}>Sign Up</button>
-        <button on:click={login}>Login</button>
+        <button class="button" on:click={signUp}>Sign Up</button>
+        <button class="button" on:click={login}>Login</button>
       </form>
   </div></div>
 {/if}
@@ -70,7 +70,7 @@
 
 /* 設定元素間距 */
 
-button{
+.button{
   margin-left: 1.6em;
 }
 .container {
