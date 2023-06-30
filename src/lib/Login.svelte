@@ -38,18 +38,21 @@
 </script>
 
 <style>
-main{
-  margin-top:100px;
-}
-red{
-  color: red;
-}
+
+  main{
+    margin-top:100px;
+  }
+  red{
+    color: red;
+  }
   .center {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    min-height: 300px;
+    min-width: 400px;
   }
 
   .container {
@@ -58,17 +61,7 @@ red{
     margin-right: 2.5em;
     align-items: center;
     justify-content: center;
-    /* transition: height 1s ease-in-out;
-    transition: width 1s ease-in-out;
-    transition: opacity 1s ease-in-out; */
   }
-
-
-  /* .big-container {
-    transition: height 1s ease-in-out;
-    transition: width 1s ease-in-out;
-    transition: opacity 1s ease-in-out;
-  } */
 
   input {
     text-align: center;
@@ -99,19 +92,6 @@ red{
     margin-left: 1.6em;
   }
 
-  .loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: rgba(255, 255, 255, 0.8);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 999;
-  }
 </style>
 
 
