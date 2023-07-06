@@ -160,7 +160,7 @@
             <button class="button" on:click={login}> 登入</button>
           </form>
         </div>
-        <p class="mini-text" on:click={()=>{log_sign = false;}} cursor="pointer">sign up a new account</p>
+        <p on:click={()=>{log_sign = false;}} cursor="pointer">sign up a new account</p>
 
         {:else}
 
@@ -175,7 +175,7 @@
             <button class="button" on:click={signUp}>登記</button>
           </form>
         </div>
-        <p class="mini-text" on:click={()=>{log_sign = true;}} cursor="pointer">sign in a exist account</p>
+        <p  on:click={()=>{log_sign = true;}} cursor="pointer">sign in a exist account</p>
 
 
 
