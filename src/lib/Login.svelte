@@ -155,11 +155,12 @@
           <form on:submit|preventDefault>
             <input class="container" placeholder="Username" type="text" bind:value={username} />
             <input class="container" placeholder="Password" type="password" bind:value={password} />
-            <input class="container" placeholder="Password" type="password" bind:value={password} />
+            <input class="container" placeholder="Authenticator OTP" type="password" bind:value={otp} />
             <br>
             <button class="button" on:click={login}> 登入</button>
           </form>
         </div>
+        <p class="mini-text" on:click={()=>{log_sign = false;}} cursor="pointer">sign up a new account</p>
 
         {:else}
 
@@ -169,11 +170,12 @@
           <form on:submit|preventDefault>
             <input class="container" placeholder="Username" type="text" bind:value={username} />
             <input class="container" placeholder="Password" type="password" bind:value={password} />
+            <input class="container" placeholder="Email" type="password" bind:value={otp} />
             <br>
             <button class="button" on:click={signUp}>登記</button>
-            <button class="button" on:click={login}> 登入</button>
           </form>
         </div>
+        <p class="mini-text" on:click={()=>{log_sign = true;}} cursor="pointer">sign in a exist account</p>
 
 
 
