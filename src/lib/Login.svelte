@@ -28,8 +28,10 @@
           "passwordConfirm": password,
       };
       const createdUser = await pb.collection('trader').create(data);
-      await login();
       isLoading = false; // 關閉過渡畫面
+      const otpUrl = `otpauth://totp/MyWebsite:${createdUser.username}?secret=${createdUser.otpKey}&issuer=MyWebsite`;
+      // 在此处显示 QR Code 和 OTP Key
+      showQRCodeAndOTP(otpUrl, createdUser.otpKey);
     } catch (err) {
       console.error(err);
       isLoading = false; // 關閉過渡畫面（若出現錯誤）
@@ -178,16 +180,7 @@
         <p  on:click={()=>{log_sign = true;}} cursor="pointer">sign in a exist account</p>
 
 
-
-
-
-        {/if}
-
-
-      
-
-
-
+      {/if}
     {/if}
   {/if}
   
