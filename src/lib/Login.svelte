@@ -3,8 +3,12 @@
   import RAQ from '../Body-mod/read-and-quote.svelte';
   import { fade } from 'svelte/transition';
 
-  let username: string;
-  let password: string;
+  let log_sign = true;
+
+  let username : string;
+  let email    : string;
+  let password : string;
+  let otp      : int;
   let isLoading: boolean = false;
 
   async function login() {
@@ -17,10 +21,11 @@
     try {
       isLoading = true; // 啟用過渡畫面
       const data = {
-        username,
-        password,
-        passwordConfirm: password,
-        name: 'hi mom!',
+          "username": username,
+          "email": email,
+          "emailVisibility": false,
+          "password": password,
+          "passwordConfirm": password,
       };
       const createdUser = await pb.collection('trader').create(data);
       await login();
@@ -140,6 +145,25 @@
       <br><button on:click={signOut}><red>Sign Out</red></button><br>
       </div>
     {:else}
+
+        {#if log_sign == true}
+
+
+
+        <h3>會員登陸</h3>
+        <div class="container" in:fade>
+          <form on:submit|preventDefault>
+            <input class="container" placeholder="Username" type="text" bind:value={username} />
+            <input class="container" placeholder="Password" type="password" bind:value={password} />
+            <input class="container" placeholder="Password" type="password" bind:value={password} />
+            <br>
+            <button class="button" on:click={login}> 登入</button>
+          </form>
+        </div>
+
+        {:else}
+
+
         <h3>會員登陸</h3>
         <div class="container" in:fade>
           <form on:submit|preventDefault>
@@ -150,6 +174,18 @@
             <button class="button" on:click={login}> 登入</button>
           </form>
         </div>
+
+
+
+
+
+        {/if}
+
+
+      
+
+
+
     {/if}
   {/if}
   
