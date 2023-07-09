@@ -2,17 +2,17 @@
   import { currentUser, pb } from './pocketbase';
   import RAQ from '../Body-mod/read-and-quote.svelte';
   import { fade } from 'svelte/transition';
-  import { toDataURL } from 'qrcode';
-  import { authenticator } from 'otplib';
+  import notp from 'notp';
+  import base32 from 'thirty-two';
 
   let log_sign = true;
 
-  let username : string;
-  let email    : string;
-  let password : string;
-  let otp = authenticator.generateSecret(password);
+  let username: string;
+  let email: string;
+  let password: string;
   let isLoading: boolean = false;
-  
+  let otp: string = "";
+
   async function login() {
     isLoading = true; // 啟用過渡畫面
     await pb.collection('trader').authWithPassword(username, password);
@@ -22,17 +22,16 @@
   async function signUp() {
     try {
       isLoading = true; // 啟用過渡畫面
-      const otpKey = authenticator.generateSecret(password);
+      const encoded = base32.encode(password).toString().replace(/=/g, '');
+      const otpHash = notp.totp.gen(password);
       const data = {
-          "username": username,
-          "emailVisibility": false,
-          "password": otpKey,
-          "passwordConfirm": otpKey,
-          "OTP": otpKey,
+        username: username,
+        emailVisibility: false,
+        password: encoded,
+        passwordConfirm: encoded,
+        OTP: otpHash,
       };
       const createdUser = await pb.collection('trader').create(data);
-      const otpUrl = authenticator.keyuri(username, 'MyWebsite', otpKey);
-      otp = await toDataURL(otpUrl);
       isLoading = false; // 關閉過渡畫面
     } catch (err) {
       console.error(err);
@@ -44,6 +43,8 @@
     pb.authStore.clear();
   }
 </script>
+
+
 
 <style>
 
@@ -158,7 +159,7 @@
           <form on:submit|preventDefault>
             <input class="container" placeholder="Username" type="text" bind:value={username} />
             <input class="container" placeholder="Password" type="password" bind:value={password} />
-            <input class="container" placeholder="Confirm Password" type="password" bind:value={otp} />
+            <input class="container" placeholder="OTP" type="password" bind:value={otp} />
             <br>
             <button class="button" on:click={login}>Sign In</button>
           </form>
@@ -173,7 +174,7 @@
           <form on:submit|preventDefault>
             <input class="container" placeholder="Username" type="text" bind:value={username} />
             <input class="container" placeholder="Password" type="password" bind:value={password} />
-            <input color="white" class="container" placeholder="Your Custom OTP Hash" type="text" bind:value={otp} />
+            <!-- <input color="white" class="container" placeholder="Your Custom OTP Hash" type="text" bind:value={otp} /> -->
             <br>
             <button class="button" on:click={signUp}>Sign Up</button>
           </form>
