@@ -2,11 +2,8 @@
   import { currentUser, pb } from './pocketbase';
   import RAQ from '../Body-mod/read-and-quote.svelte';
   import { fade } from 'svelte/transition';
-  import speakeasy from 'speakeasy';
-    import { AES } from 'crypto-js';
-
-  const secret = speakeasy.generateSecret({ length: 20 });
-  const base32Secret = secret.base32;
+  import { AES } from 'crypto-js';
+  import { totp } from "totp-generator";
 
   let log_sign = true;
 
@@ -157,14 +154,14 @@
 
 
 
-        <h3>會員登陸</h3>
+        <h3>Member Login</h3>
         <div class="container" in:fade>
           <form on:submit|preventDefault>
             <input class="container" placeholder="Username" type="text" bind:value={username} />
             <input class="container" placeholder="Password" type="password" bind:value={password} />
-            <input class="container" placeholder="Authenticator OTP" type="password" bind:value={otp} />
+            <input class="container" placeholder="Confirm Password" type="password" bind:value={otp} />
             <br>
-            <button class="button" on:click={login}> 登入</button>
+            <button class="button" on:click={login}>Sign In</button>
           </form>
         </div>
         <p on:click={()=>{log_sign = false;}} cursor="pointer">sign up a new account</p>
@@ -172,14 +169,14 @@
         {:else}
 
 
-        <h3>會員登陸</h3>
+        <h3>Member Signup</h3>
         <div class="container" in:fade>
           <form on:submit|preventDefault>
             <input class="container" placeholder="Username" type="text" bind:value={username} />
             <input class="container" placeholder="Password" type="password" bind:value={password} />
-            <input class="container" placeholder="Email" type="password" bind:value={otp} />
+            <input color="white" class="container" placeholder="Your Custom OTP Hash" type="text" bind:value={otp} />
             <br>
-            <button class="button" on:click={signUp}>登記</button>
+            <button class="button" on:click={signUp}>Sign Up</button>
           </form>
         </div>
         <p  on:click={()=>{log_sign = true;}} cursor="pointer">sign in a exist account</p>
