@@ -3,14 +3,15 @@
   import RAQ from '../Body-mod/read-and-quote.svelte';
   import { fade } from 'svelte/transition';
   import { AES } from 'crypto-js';
-  import { totp } from "totp-generator";
+  import totp from "totp-generator";
 
   let log_sign = true;
 
   let username : string;
   let email    : string;
   let password : string;
-  let otp      : int;
+  // let pw = AES.encrypt(username, password).toString();
+  let otp      = totp("JBSWY3DPEHPK3PXP", { digits: 30 });
   let isLoading: boolean = false;
 
   async function login() {
