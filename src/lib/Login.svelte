@@ -2,18 +2,17 @@
   import { currentUser, pb } from './pocketbase';
   import RAQ from '../Body-mod/read-and-quote.svelte';
   import { fade } from 'svelte/transition';
-  import { AES } from 'crypto-js';
-  import totp from "totp-generator";
+  import { toDataURL } from 'qrcode';
+  import { authenticator } from 'otplib';
 
   let log_sign = true;
 
   let username : string;
   let email    : string;
   let password : string;
-  // let pw = AES.encrypt(username, password).toString();
-  let otp      = totp("JBSWY3DPEHPK3PXP", { digits: 30 });
+  let otp = authenticator.generateSecret(password);
   let isLoading: boolean = false;
-
+  
   async function login() {
     isLoading = true; // 啟用過渡畫面
     await pb.collection('trader').authWithPassword(username, password);
@@ -23,18 +22,18 @@
   async function signUp() {
     try {
       isLoading = true; // 啟用過渡畫面
+      const otpKey = authenticator.generateSecret(password);
       const data = {
           "username": username,
-          "email": email,
           "emailVisibility": false,
-          "password": password,
-          "passwordConfirm": password,
+          "password": otpKey,
+          "passwordConfirm": otpKey,
+          "OTP": otpKey,
       };
       const createdUser = await pb.collection('trader').create(data);
+      const otpUrl = authenticator.keyuri(username, 'MyWebsite', otpKey);
+      otp = await toDataURL(otpUrl);
       isLoading = false; // 關閉過渡畫面
-      const otpUrl = `otpauth://totp/MyWebsite:${createdUser.username}?secret=${createdUser.otpKey}&issuer=MyWebsite`;
-      // 在此处显示 QR Code 和 OTP Key
-      showQRCodeAndOTP(otpUrl, createdUser.otpKey);
     } catch (err) {
       console.error(err);
       isLoading = false; // 關閉過渡畫面（若出現錯誤）
@@ -44,7 +43,6 @@
   function signOut() {
     pb.authStore.clear();
   }
-
 </script>
 
 <style>
