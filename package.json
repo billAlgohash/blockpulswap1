@@ -23,9 +23,11 @@
     "@supabase/auth-ui-react": "^0.4.2",
     "@supabase/auth-ui-shared": "^0.1.6",
     "@supabase/supabase-js": "^2.26.0",
+    "crypto-js": "^4.1.1",
     "firebase": "^9.22.2",
     "pg": "^8.11.0",
     "pocketbase": "^0.15.2",
+    "speakeasy": "^2.0.0",
     "types": "^0.1.1"
   }
 }
