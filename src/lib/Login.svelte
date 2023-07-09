@@ -2,7 +2,6 @@
   import { currentUser, pb } from './pocketbase';
   import RAQ from '../Body-mod/read-and-quote.svelte';
   import { fade } from 'svelte/transition';
-  import QRCode from 'qrcode';
 
   let log_sign = true;
 
