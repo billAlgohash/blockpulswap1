@@ -3,7 +3,7 @@
   import RAQ from '../Body-mod/read-and-quote.svelte';
   import { fade } from 'svelte/transition';
   import speakeasy from 'speakeasy';
-  import { AES } from 'crypto-js';
+    import { AES } from 'crypto-js';
 
   const secret = speakeasy.generateSecret({ length: 20 });
   const base32Secret = secret.base32;
